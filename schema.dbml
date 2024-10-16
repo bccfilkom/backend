@@ -1,0 +1,52 @@
+/*
+Copyright 2024 Basic Computing Community.
+*/
+
+Table users {
+  id bigint [primary key]
+  // ...
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table user_roles {
+  user_id bigint [ref: > users.id]
+  role_id bigint [ref: > roles.id]
+}
+
+Table roles {
+  id bigint [primary key]
+  name varchar(255)
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table commissions {
+  id bigint [primary key]
+  // ...
+  user_id bigint [ref: > users.id]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table invoices {
+  id bigint [primary key]
+  // ...
+  commission_id bigint [ref: > commissions.id]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table documents {
+  id bigint [primary key]
+  type document_types
+  // ...
+  commission_id bigint [ref: > commissions.id]
+  created_at timestamp
+  updated_at timestamp
+}
+
+enum document_types {
+  mou
+  bast
+}
